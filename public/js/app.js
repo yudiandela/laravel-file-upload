@@ -47369,7 +47369,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
-        // swal ( "Oops" ,  "Something went wrong!" ,  "error" )
         console.log('Component mounted.');
     }
 });
@@ -47398,8 +47397,9 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
-              _c("i", { staticClass: "fa fa-paperclip" }),
-              _vm._v(" I'm an example component.\n                ")
+              _vm._v(
+                "\n                    I'm an example component.\n                "
+              )
             ])
           ])
         ])
