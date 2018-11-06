@@ -16,6 +16,13 @@ class ImageController extends Controller
     protected $response = [];
 
     /**
+     * passing id from user
+     *
+     * @var integer
+     */
+    protected $user_id = 1;
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -50,11 +57,16 @@ class ImageController extends Controller
 
         $images = $this->uploadFiles($request);
 
+        if (Auth::user()) {
+            $this->user_id = Auth::user()->id;
+        }
+
         foreach ($images as $image) {
             list($value) = $image;
 
             $this->response[] = Image::create([
-                'value' => $value
+                'user_id' => $this->user_id,
+                'value'   => $value
             ]);
         }
 

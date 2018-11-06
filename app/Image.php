@@ -11,5 +11,5 @@ class Image extends Model
      *
      * @var array
      */
-    protected $fillable = ['value'];
+    protected $fillable = ['user_id', 'value'];
 }
