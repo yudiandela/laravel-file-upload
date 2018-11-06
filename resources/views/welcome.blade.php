@@ -8,10 +8,7 @@
                 <h3 class="text-center">Upload Files</h3>
                 <div class="card">
                     <div class="card-body">
-                        <div class="custom-file">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
-                            <input type="file" class="custom-file-input" id="customFile">
-                        </div>
+                        <form-upload></form-upload>
                     </div>
                 </div>
             </div>

@@ -13973,7 +13973,7 @@ window.Vue = __webpack_require__(39);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', __webpack_require__(40));
+Vue.component('form-upload', __webpack_require__(40));
 
 var app = new Vue({
   el: '#app'
@@ -47214,7 +47214,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/js/components/ExampleComponent.vue"
+Component.options.__file = "resources/js/components/FormUpload.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -47223,9 +47223,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-299e239e", Component.options)
+    hotAPI.createRecord("data-v-2fa09610", Component.options)
   } else {
-    hotAPI.reload("data-v-299e239e", Component.options)
+    hotAPI.reload("data-v-2fa09610", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -47366,10 +47366,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
+    data: function data() {
+        return {
+            files: []
+        };
+    },
+
+
+    methods: {
+        storeFile: function storeFile() {
+            var _this = this;
+
+            var formData = new FormData();
+            formData.append('images', this.files);
+
+            axios.post('/image', formData).then(function (res) {
+                return _this.files = [], swal("Great...", "Files uploaded", "success");
+            }).catch(function (err) {
+                return swal("Oops...", err, "error");
+            });
+        },
+        onChange: function onChange(event) {
+            this.files = event.target.files[0];
+        }
     }
 });
 
@@ -47381,30 +47403,71 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.storeFile($event)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "custom-file rounded-0" }, [
+          _c("input", {
+            staticClass: "custom-file-input rounded-0",
+            attrs: { type: "file", id: "uploadFile" },
+            on: { change: _vm.onChange }
+          }),
+          _vm._v(" "),
+          _c("label", {
+            staticClass: "custom-file-label rounded-0",
+            attrs: { for: "uploadFile" },
+            domProps: { innerHTML: _vm._s(_vm.files.name) }
+          })
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-block mt-2",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("Submit")]
+        )
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card card-default" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
+    return _c(
+      "div",
+      {
+        staticClass: "progress",
+        staticStyle: { height: "1px" },
+        attrs: { hidden: "" }
+      },
+      [
+        _c("div", {
+          staticClass: "progress-bar progress-bar-striped",
+          staticStyle: { width: "25%" },
+          attrs: {
+            role: "progressbar",
+            "aria-valuenow": "25",
+            "aria-valuemin": "0",
+            "aria-valuemax": "100"
+          }
+        })
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -47412,7 +47475,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-299e239e", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2fa09610", module.exports)
   }
 }
 
