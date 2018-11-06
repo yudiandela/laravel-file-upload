@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ImageController extends Controller
 {
+    /**
+     * Passing variable
+     *
+     * @var array
+     */
+    protected $response = [];
+
     /**
      * Display a listing of the resource.
      *
@@ -36,15 +44,44 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'images' => 'required|image'
+            'images'   => 'required',
+            'images.*' => 'image|mimes:jpg,jpeg,png,bmp,gif,svg'
         ]);
 
-        $images = $this->uploadFile($request);
+        $images = $this->uploadFiles($request);
+
+        foreach ($images as $image) {
+            list($value) = $image;
+
+            $this->response[] = Image::create([
+                'value' => $value
+            ]);
+        }
 
         return response()->json([
-            'data'    => $images,
+            'data'    => $this->response,
             'message' => 'success'
         ], 201);
+    }
+
+    /**
+     * Upload multiple file
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    protected function uploadFiles($request)
+    {
+        $uploadedImages = [];
+
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+            foreach ($images as $image) {
+                $uploadedImages[] = $this->uploadFile($image);
+            }
+        }
+
+        return $uploadedImages;
     }
 
     /**
@@ -53,17 +90,21 @@ class ImageController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    protected function uploadFile($request)
+    protected function uploadFile($image)
     {
-        if ($request->hasFile('images')) {
-            $images = $request->images->store('user');
+        $originalName  = $image->getClientOriginalName();
+        $fileExtension = $image->getClientOriginalExtension();
+        $fileNameOnly  = pathinfo($originalName, PATHINFO_FILENAME);
 
-            Image::create([
-                'value' => $images
-            ]);
+        $fileName = str_slug($fileNameOnly);
+        if (Auth::user()) {
+            $fileName .= '-' . str_slug(Auth::user()->name);
         }
+        $fileName .='-' . time() . '.' . $fileExtension;
 
-        return $images;
+        $images = $image->storeAs('user', $fileName);
+
+        return [$images];
     }
 
     /**

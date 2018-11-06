@@ -1,9 +1,12 @@
 <template>
     <div>
         <form @submit.prevent="storeFile">
-            <div class="custom-file rounded-0">
-                <input @change="onChange" type="file" class="custom-file-input rounded-0" id="uploadFile">
-                <label v-html="files.name" class="custom-file-label rounded-0" for="uploadFile"></label>
+            <div class="input-group">
+                <input :value="getFilesName()" type="text" readonly class="form-control rounded-0" placeholder="Choose files">
+                <div @click="openFilePicker" class="input-group-append">
+                    <span class="input-group-text"><i class="fa fa-paperclip"></i></span>
+                </div>
+                <input hidden multiple @change="onChange" type="file" id="uploadFile">
             </div>
 
             <div hidden class="progress" style="height: 1px">
@@ -26,7 +29,10 @@ export default {
     methods: {
         storeFile() {
             let formData = new FormData()
-            formData.append('images', this.files)
+
+            for (const file of this.files) {
+                formData.append('images[]', file, file.name)
+            }
 
             axios.post('/image', formData)
                 .then(res => (
@@ -38,8 +44,23 @@ export default {
                 ))
         },
 
+        openFilePicker() {
+            $('#uploadFile').click()
+        },
+
+        getFilesName(){
+            let filesName = []
+
+            if (this.files.length > 0) {
+                for (let file of this.files) {
+                    filesName.push(file.name)
+                }
+            }
+            return filesName.join(", ")
+        },
+
         onChange(event) {
-            this.files = event.target.files[0]
+            this.files = event.target.files
         }
     }
 }

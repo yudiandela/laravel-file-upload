@@ -47367,6 +47367,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -47381,7 +47384,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             var formData = new FormData();
-            formData.append('images', this.files);
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this.files[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var file = _step.value;
+
+                    formData.append('images[]', file, file.name);
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
 
             axios.post('/image', formData).then(function (res) {
                 return _this.files = [], swal("Great...", "Files uploaded", "success");
@@ -47389,8 +47416,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return swal("Oops...", err, "error");
             });
         },
+        openFilePicker: function openFilePicker() {
+            $('#uploadFile').click();
+        },
+        getFilesName: function getFilesName() {
+            var filesName = [];
+
+            if (this.files.length > 0) {
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
+
+                try {
+                    for (var _iterator2 = this.files[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var file = _step2.value;
+
+                        filesName.push(file.name);
+                    }
+                } catch (err) {
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
+                        }
+                    } finally {
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
+                        }
+                    }
+                }
+            }
+            return filesName.join(", ");
+        },
         onChange: function onChange(event) {
-            this.files = event.target.files[0];
+            this.files = event.target.files;
         }
     }
 });
@@ -47415,21 +47476,29 @@ var render = function() {
         }
       },
       [
-        _c("div", { staticClass: "custom-file rounded-0" }, [
+        _c("div", { staticClass: "input-group" }, [
           _c("input", {
-            staticClass: "custom-file-input rounded-0",
-            attrs: { type: "file", id: "uploadFile" },
-            on: { change: _vm.onChange }
+            staticClass: "form-control rounded-0",
+            attrs: { type: "text", readonly: "", placeholder: "Choose files" },
+            domProps: { value: _vm.getFilesName() }
           }),
           _vm._v(" "),
-          _c("label", {
-            staticClass: "custom-file-label rounded-0",
-            attrs: { for: "uploadFile" },
-            domProps: { innerHTML: _vm._s(_vm.files.name) }
+          _c(
+            "div",
+            {
+              staticClass: "input-group-append",
+              on: { click: _vm.openFilePicker }
+            },
+            [_vm._m(0)]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { hidden: "", multiple: "", type: "file", id: "uploadFile" },
+            on: { change: _vm.onChange }
           })
         ]),
         _vm._v(" "),
-        _vm._m(0),
+        _vm._m(1),
         _vm._v(" "),
         _c(
           "button",
@@ -47444,6 +47513,14 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-text" }, [
+      _c("i", { staticClass: "fa fa-paperclip" })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
