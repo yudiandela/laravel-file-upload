@@ -1,10 +1,8 @@
 # Laravel File Upload
 
-<p style="text-align:center">
-<a href="https://packagist.org/packages/yudiandela/laravel-file-upload"><img src="https://poser.pugx.org/yudiandela/laravel-file-upload/downloads" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/yudiandela/laravel-file-upload"><img src="https://poser.pugx.org/yudiandela/laravel-file-upload/v/stable" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/yudiandela/laravel-file-upload"><img src="https://poser.pugx.org/yudiandela/laravel-file-upload/license" alt="License"></a>
-</p>
+[![Latest Stable Version](https://poser.pugx.org/yudiandela/laravel-file-upload/v/stable)](https://packagist.org/packages/yudiandela/laravel-file-upload)
+[![Total Downloads](https://poser.pugx.org/yudiandela/laravel-file-upload/downloads)](https://packagist.org/packages/yudiandela/laravel-file-upload)
+[![License](https://poser.pugx.org/yudiandela/laravel-file-upload/license)](https://packagist.org/packages/yudiandela/laravel-file-upload)
 
 ## Deskripsi
 
@@ -77,12 +75,6 @@ DB_PASSWORD=
 
 ```shell
 php artisan migrate --seed
-```
-
-* Install plugins tambahan
-
-```shell
-npm install
 ```
 
 * Jalankan server php dengan perintah
