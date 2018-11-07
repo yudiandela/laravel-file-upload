@@ -96,7 +96,7 @@
         <div class="container-fluid mt-5 bg-primary-custom pt-5 pb-2">
             <div class="row">
                 <div class="col-12 footer text-center text-white">
-                    [ ] with ❤ in Aceh Besar - (Naggroe Aceh Darussalam), Indonesia
+                    [ ] with ❤ in Aceh Besar - (Nanggroe Aceh Darussalam), Indonesia
                     <ul class="nav my-2 justify-content-center">
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">Term of Service</a>
