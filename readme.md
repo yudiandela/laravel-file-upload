@@ -19,11 +19,6 @@ Beberapa Fungsi yang ada :
 ### Required
 
 * [Laravel ^5.7.0](https://laravel.com/ "Laravel")
-* [Intervention Image ^2.4](https://github.com/Intervention/image "Image Intervention")
-
-### Developer
-
-* [Laravel Debugbar ^3.2](https://github.com/barryvdh/laravel-debugbar "Laravel Debugbar")
 
 ### Plugins (JS, CSS)
 
