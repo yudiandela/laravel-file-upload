@@ -66,7 +66,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right rounded-0" aria-labelledby="navbarDropdown">
-                                    <a class="btn btn-primary btn-sm dropdown-item" href="{{ route('home') }}">
+                                    <a class="btn btn-primary btn-sm dropdown-item" href="{{ Auth::user()->role == 'admin' ? route('admin.index') : route('user.index') }}">
                                         <i class="fas fa-home"></i> {{ __('Dashboard') }}
                                     </a>
 

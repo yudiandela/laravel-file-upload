@@ -15,8 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('image', 'ImageController');
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('image', 'ImageController');
+Route::resource('admin', 'AdminController');
+Route::resource('user', 'UserController');

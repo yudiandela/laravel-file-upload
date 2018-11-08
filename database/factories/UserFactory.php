@@ -18,6 +18,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'name' => 'Administrator',
         'email' => 'admin@mail.com',
         'password' => '$2y$10$WmJD90fsykqoeZxi.whm4ef2stDm0dacFqwzDLQeuczy5hquk0lwu', // 123456
+        'role' => 'admin', // 123456
         'remember_token' => str_random(10),
     ];
 });
