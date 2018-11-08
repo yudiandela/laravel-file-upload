@@ -96,10 +96,6 @@ email   : admin@mail.com
 password: 123456
 ```
 
-## Catatan Penting Untuk Production
-
-Ubah konfigurasi di file .env `APP_DEBUG` menjadi `false`.
-
 ## Preview
 
 ### Halaman Demo
